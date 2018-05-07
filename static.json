@@ -3,5 +3,10 @@
   "logging": {
     "access": true,
     "error": "error"
+  },
+  "headers": {
+    "/": {
+      "Cache-Control": "public; max-age=86400"
+    }
   }
 }

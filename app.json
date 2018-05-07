@@ -1,0 +1,19 @@
+{
+  "buildpacks": [
+      {"url": "heroku/nodejs"},
+      {"url": "https://github.com/heroku/heroku-buildpack-static"}
+  ],
+  "description": "The web front-end for a Heimdallr app",
+  "env": {
+    "ENV": {
+      "description": "short string indicating the type of deployment this is: dev|prod|deploy",
+      "value": "dev"
+    },
+    "HEIMDALLR_API": {
+      "description": "the base URL to use as the Heimdallr API (default: http://localhost:8080)",
+      "value": "http://localhost:8080"
+    }
+  },
+  "name": "Heimdallr UI",
+  "repository": "https://github.com/eve-heimdallr/heimdallr-ui"
+}

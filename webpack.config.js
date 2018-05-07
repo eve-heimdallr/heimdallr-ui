@@ -35,7 +35,6 @@ module.exports = () => {
   config.entry = {
     app: './heimdallr/main.ts',
     polyfill: './heimdallr/polyfill.ts',
-    vendor: './heimdallr/vendor.ts',
   };
 
   config.output = {
@@ -92,14 +91,22 @@ module.exports = () => {
     }),
   ];
 
+  config.optimization = {
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+          angular: { test: /[\\/]node_modules[\\/]@angular[\\/]/, name: "angular", priority: 10 },
+          commons: { test: /[\\/]node_modules[\\/]/, name: "vendor", priority: 5 },
+      }
+    }
+  };
+
   if (isProd) {
-    config.optimization = {
-      minimize: true,
-      minimizer: [new UglifyJsPlugin({
+    config.optimization.minimize = true;
+    config.optimization.minimizer = [new UglifyJsPlugin({
         sourceMap: true,
         uglifyOptions: {keep_fnames: true},
-      })],
-    };
+    })];
   }
 
   config.devServer = {

@@ -14,16 +14,21 @@ var envText = isDeploy ? 'deploy' : isProd ? 'prod' : 'dev'
 console.debug('Resolved build environment: '  + envText);
 
 // Webpack Plugins
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = () => {
   var config = {};
 
-  if (isDev) {
+  if (isDeploy) {
+    config.mode='production';
+    config.devtool='';
+  } else if (isDev) {
+    config.mode='development';
     config.devtool = 'eval-source-map';
   } else {
+    config.mode='production';
     config.devtool = 'source-map';
   }
 
@@ -63,9 +68,6 @@ module.exports = () => {
       from: root('heimdallr', 'static'),
       flatten: true,
     }]),
-    new CommonsChunkPlugin({
-      name: ['vendor', 'polyfill'],
-    }),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',
@@ -91,9 +93,13 @@ module.exports = () => {
   ];
 
   if (isProd) {
-    config.plugins.push(
-      new webpack.optimize.UglifyJsPlugin({sourceMap: true, mangle: { keep_fnames: true }})
-    );
+    config.optimization = {
+      minimize: true,
+      minimizer: [new UglifyJsPlugin({
+        sourceMap: true,
+        uglifyOptions: {keep_fnames: true},
+      })],
+    };
   }
 
   config.devServer = {

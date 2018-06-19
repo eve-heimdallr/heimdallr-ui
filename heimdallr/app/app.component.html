@@ -1,0 +1,17 @@
+<h1>It works!</h1>
+
+<p> Kind of. This is just a page to test basic authentication using the Heimdallr backend.</p>
+
+<p> 
+    Token is set? 
+    <span *ngIf="tokenisSet$ | async">
+        <strong>yes</strong>
+    </span>
+    <span *ngIf="!(tokenisSet$ | async)">
+        <strong>no</strong>
+    </span>
+</p>
+
+<p *ngIf="tokenisSet$ | async">
+    Your character name: <strong>{{characterName$ | async}}</strong>
+</p>

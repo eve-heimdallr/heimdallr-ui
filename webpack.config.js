@@ -4,6 +4,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
 
 var ENV = process.env.ENV;
 var isDeploy = ENV === 'deploy';
@@ -54,7 +55,8 @@ module.exports = () => {
   config.module = {
     rules: [
       {test: require.resolve("jquery"), loaders: ["expose-loader?$", "expose-loader?jQuery"] },
-      {test: /\.ts$/, loader: 'awesome-typescript-loader?configFileName=' + atlConfigFile},
+      //{test: /\.ts$/, loader: 'awesome-typescript-loader?configFileName=' + atlConfigFile},
+      {test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/, loader: '@ngtools/webpack'},
       {test: /\.(css|scss|sass)$/, loaders: ['to-string-loader', 'css-loader', 'sass-loader']},
       {test: /\.html$/, loader: 'html-loader'},
       {test: /\.(gif|png|jpg|svg|woff|woff2|ttf|eot)$/, loader: 'file-loader'},
@@ -89,6 +91,11 @@ module.exports = () => {
       template: root('heimdallr', 'index.html'),
       chunksSortMode: 'dependency',
     }),
+    new AngularCompilerPlugin({
+      tsConfigPath: root('tsconfig.json'),
+      entryModule: root('heimdallr', 'app', 'app.module.ts') + '#AppModule',
+      sourceMap: true,
+    })
   ];
 
   config.optimization = {

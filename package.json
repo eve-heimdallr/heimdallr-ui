@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@angular/common": "^6.0.5",
-    "@angular/compiler": "^6.0.5",
     "@angular/core": "^6.0.5",
     "@angular/forms": "^6.0.5",
     "@angular/http": "^6.0.5",
@@ -28,6 +27,10 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
+    "@angular/cli": "^6.0.8",
+    "@angular/compiler": "^6.0.5",
+    "@angular/compiler-cli": "^6.0.5",
+    "@ngtools/webpack": "^6.0.8",
     "@types/bootstrap": "^4.1.0",
     "@types/core-js": "^0.9.46",
     "@types/jquery": "^3.3.2",
@@ -53,7 +56,7 @@
     "style-loader": "^0.21.0",
     "sugarss": "^1.0.1",
     "to-string-loader": "^1.1.5",
-    "typescript": "^2.9.2",
+    "typescript": "^2.7.2",
     "uglify-js": "^3.4.0",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "url-loader": "^1.0.1",

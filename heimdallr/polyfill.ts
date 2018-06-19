@@ -1,6 +1,7 @@
-import 'core-js/client/core';
+import 'core-js';
+import 'core-js/es7/reflect';
 import 'reflect-metadata';
-require('zone.js/dist/zone');
+import 'zone.js/dist/zone';
 
 if (['prod', 'deploy'].indexOf(process.env.ENV) > -1) {
   // Production
@@ -12,3 +13,5 @@ if (['prod', 'deploy'].indexOf(process.env.ENV) > -1) {
 
   require('zone.js/dist/long-stack-trace-zone');
 }
+
+console.log('injected polyfills');

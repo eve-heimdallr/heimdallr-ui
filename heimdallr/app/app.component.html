@@ -4,14 +4,18 @@
 
 <p> 
     Token is set? 
-    <span *ngIf="tokenisSet$ | async">
+    <span *ngIf="tokenIsSet$ | async">
         <strong>yes</strong>
     </span>
-    <span *ngIf="!(tokenisSet$ | async)">
+    <span *ngIf="!(tokenIsSet$ | async)">
         <strong>no</strong>
     </span>
 </p>
 
-<p *ngIf="tokenisSet$ | async">
+<p *ngIf="tokenIsSet$ | async">
     Your character name: <strong>{{characterName$ | async}}</strong>
 </p>
+
+<hr />
+
+<router-outlet></router-outlet>
